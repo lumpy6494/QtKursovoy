@@ -15,8 +15,6 @@ public:
     void add_orderitems(OrderItems *item);
 
 
-
-
 };
 
 #endif // CUSTOMCHECKBOX_H
