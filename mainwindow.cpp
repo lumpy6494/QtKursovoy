@@ -21,7 +21,14 @@ MainWindow::MainWindow(QWidget *parent)
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("./main.db");
 
-    Ivan.set_name("Иван");
+    Ivan->setName("Иван");
+    groupwaiter.set_waiter_in_group(Ivan);
+
+    admin->setName("Иванов Иван Иванович");
+    admin->setLogin("admin");
+    admin->setPassword("12345");
+
+    groupadmin.set_group_admin(admin);
 
     table.set_table(12);
 
@@ -116,6 +123,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         ui->statusbar->showMessage("Не удалось подключиться к базе данныx!");
     }
+
 }
 
 
@@ -123,150 +131,24 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::createUI()
 {
     this->ui->label_menu->setText(menu.get_title());
-
     this->ui->label_onedish->setText(menu.get_group("Первые блюда")->get_title());
-    for (int i = 1; i <= menu.get_group("Первые блюда")->get_dish().size(); i++)
-    {
-      Dish *dish = menu.get_group("Первые блюда")->get_dish().value(i);
-      OrderItems *orderitems = new OrderItems(dish);
-
-      QString price =  QString::number(dish->get_price());
-      QString weight = QString::number(dish->get_weigth());
-      QString time =  QString::number(dish->get_time());
-
-      QHBoxLayout *lay = new QHBoxLayout();
-
-      CustomCheckbox *check = new CustomCheckbox();
-      check->setText(dish->get_title());
-      check->add_orderitems(orderitems);
-
-      QSpinBox *spin = new QSpinBox();
-      spin->setMaximumSize(70,30);
-
-      spin->setValue(orderitems->get_amount());
-      lay->addWidget(check);
-      lay->addWidget(spin);
-
-      this->ui->Layout_onedish->addLayout(lay);
-      this->ui->Layout_onedish->addWidget(new QLabel("Цена: " + price +"р"+ "\t" + "Вес: " + weight +"г" + "\t" + "Время приготовления: " + time +" м" ));
-
-      connect(spin, SIGNAL(valueChanged(int)),orderitems,SLOT(set_amount_slot(int)));
-      connect(spin, SIGNAL(valueChanged(int)),this,SLOT(view_check()));
-      connect(spin, SIGNAL(valueChanged(int)),this,SLOT(view_order_summ()));
-      connect(check,SIGNAL(stateChanged(int)), this,SLOT(boxclick()));
-      connect(check, SIGNAL(stateChanged(int)), this, SLOT(view_check()));
-      connect(check, SIGNAL(stateChanged(int)), this, SLOT(view_order_summ()));
-    }
+    this->show_dish("Первые блюда", ui->Layout_onedish);
 
     this->ui->label_twodish->setText(menu.get_group("Вторые блюда")->get_title());
-    for (int i = 1; i <= menu.get_group("Вторые блюда")->get_dish().size(); i++)
-    {
-        Dish *dish = menu.get_group("Вторые блюда")->get_dish().value(i);
-        OrderItems *orderitems = new OrderItems(dish);
-
-        QString price =  QString::number(dish->get_price());
-        QString weight = QString::number(dish->get_weigth());
-        QString time =  QString::number(dish->get_time());
-
-        QHBoxLayout *lay = new QHBoxLayout();
-
-        CustomCheckbox *check = new CustomCheckbox();
-        check->setText(dish->get_title());
-        check->add_orderitems(orderitems);
-
-        QSpinBox *spin = new QSpinBox();
-        spin->setMaximumSize(70,30);
-
-        spin->setValue(orderitems->get_amount());
-        lay->addWidget(check);
-        lay->addWidget(spin);
-
-        this->ui->Layout_twodish->addLayout(lay);
-        this->ui->Layout_twodish->addWidget(new QLabel("Цена: " + price +"р"+ "\t" + "Вес: " + weight +"г" + "\t" + "Время приготовления: " + time +" м" ));
-
-        connect(spin, SIGNAL(valueChanged(int)),orderitems,SLOT(set_amount_slot(int)));
-        connect(spin, SIGNAL(valueChanged(int)),this,SLOT(view_check()));
-        connect(spin, SIGNAL(valueChanged(int)),this,SLOT(view_order_summ()));
-        connect(check,SIGNAL(stateChanged(int)), this,SLOT(boxclick()));
-        connect(check, SIGNAL(stateChanged(int)), this, SLOT(view_check()));
-        connect(check, SIGNAL(stateChanged(int)), this, SLOT(view_order_summ()));
-    }
+    this->show_dish("Вторые блюда", ui->Layout_twodish);
 
     this->ui->label_threedish->setText(menu.get_group("Закуски")->get_title());
-    for (int i = 1; i <= menu.get_group("Закуски")->get_dish().size(); i++)
-    {
-        Dish *dish = menu.get_group("Закуски")->get_dish().value(i);
-        OrderItems *orderitems = new OrderItems(dish);
-
-        QString price =  QString::number(dish->get_price());
-        QString weight = QString::number(dish->get_weigth());
-        QString time =  QString::number(dish->get_time());
-
-        QHBoxLayout *lay = new QHBoxLayout();
-
-        CustomCheckbox *check = new CustomCheckbox();
-        check->setText(dish->get_title());
-        check->add_orderitems(orderitems);
-
-        QSpinBox *spin = new QSpinBox();
-        spin->setMaximumSize(70,30);
-
-        spin->setValue(orderitems->get_amount());
-        lay->addWidget(check);
-        lay->addWidget(spin);
-
-        this->ui->Layout_threedish->addLayout(lay);
-        this->ui->Layout_threedish->addWidget(new QLabel("Цена: " + price +"р"+ "\t" + "Вес: " + weight +"г" + "\t" + "Время приготовления: " + time +" м" ));
-
-        connect(spin, SIGNAL(valueChanged(int)),orderitems,SLOT(set_amount_slot(int)));
-        connect(spin, SIGNAL(valueChanged(int)),this,SLOT(view_check()));
-        connect(spin, SIGNAL(valueChanged(int)),this,SLOT(view_order_summ()));
-        connect(check,SIGNAL(stateChanged(int)), this,SLOT(boxclick()));
-        connect(check, SIGNAL(stateChanged(int)), this, SLOT(view_check()));
-        connect(check, SIGNAL(stateChanged(int)), this, SLOT(view_order_summ()));
-    }
-
+    this->show_dish("Закуски", ui->Layout_threedish);
 
     this->ui->label_drinks->setText(menu.get_group("Напитки")->get_title());
-    for (int i = 1; i <= menu.get_group("Напитки")->get_dish().size(); i++)
-    {
-        Dish *dish = menu.get_group("Напитки")->get_dish().value(i);
-        OrderItems *orderitems = new OrderItems(dish);
-
-        QString price =  QString::number(dish->get_price());
-        QString weight = QString::number(dish->get_weigth());
-        QString time =  QString::number(dish->get_time());
-
-        QHBoxLayout *lay = new QHBoxLayout();
-
-        CustomCheckbox *check = new CustomCheckbox();
-        check->setText(dish->get_title());
-        check->add_orderitems(orderitems);
-
-        QSpinBox *spin = new QSpinBox();
-        spin->setMaximumSize(70,30);
-
-        spin->setValue(orderitems->get_amount());
-        lay->addWidget(check);
-        lay->addWidget(spin);
-
-        this->ui->Layout_drinks->addLayout(lay);
-        this->ui->Layout_drinks->addWidget(new QLabel("Цена: " + price +"р"+ "\t" + "Вес: " + weight +"г" + "\t" + "Время приготовления: " + time +" м" ));
-
-        connect(spin, SIGNAL(valueChanged(int)),orderitems,SLOT(set_amount_slot(int)));
-        connect(spin, SIGNAL(valueChanged(int)),this,SLOT(view_check()));
-        connect(spin, SIGNAL(valueChanged(int)),this,SLOT(view_order_summ()));
-        connect(check,SIGNAL(stateChanged(int)), this,SLOT(boxclick()));
-        connect(check, SIGNAL(stateChanged(int)), this, SLOT(view_check()));
-        connect(check, SIGNAL(stateChanged(int)), this, SLOT(view_order_summ()));
-
-    }
+    this->show_dish("Напитки", ui->Layout_drinks);
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
 }
 
 void MainWindow::boxclick()
@@ -297,7 +179,6 @@ void MainWindow::view_check()
     for(auto ord : order.get_all_orderitems())
         if (ord->get_amount() > 0)
             ui->textCheck->append(ord->get_dishes().get_title() +"\t\t"+ QString::number(ord->get_amount()) + "\t\t" + QString::number(ord->get_price()) + "р");
-
 }
 
 void MainWindow::view_order_summ()
@@ -312,15 +193,13 @@ void MainWindow::view_order_summ()
 
 
 
-
-
 void MainWindow::on_Order_clicked()
 {
     order.set_table(&table);
     QMap<int, QStringList> liststr;
     int index =0;
     int size_order = order.get_all_orderitems().size();
-    int max_dish = 0;
+    int max_time_dish = 0;
     if (size_order > 0)
     {
         result_window =new Result_order(this);
@@ -337,8 +216,8 @@ void MainWindow::on_Order_clicked()
               value_in_table.append(QString::number(res->get_amount()));
               value_in_table.append(QString::number(res->get_price()));
 
-              if (max_dish < res->get_dishes().get_time())
-                      max_dish = res->get_dishes().get_time();
+              if (max_time_dish < res->get_dishes().get_time())
+                      max_time_dish = res->get_dishes().get_time();
 
 
               liststr.insert(index, value_in_table);
@@ -346,15 +225,14 @@ void MainWindow::on_Order_clicked()
           }
 
       }
-      result_window->set_table_result_check(liststr, size_order );
+      int randomValue = (qrand() % groupwaiter.get_all_waiters().size())+1;
+
+      qDebug() << randomValue;
+      result_window->set_table_result_check(liststr, size_order);
       result_window->set_textbrowser("\n\n<b>Номер вашего столика: <\b>" + QString::number(order.get_table()->get_table()));
-      result_window->set_textbrowser("\n<b>Ваш Официант: <\b>" + Ivan.get_name() + "\n");
-      result_window->set_textbrowser("<b>Максимальное время подачи заказа: <\b>" + QString::number(max_dish)+" минут\n");
+      result_window->set_textbrowser("\n<b>Ваш Официант: <\b>" + groupwaiter.get_waiters_is_group(randomValue)->getName() + "\n");
+      result_window->set_textbrowser("<b>Максимальное время подачи заказа: <\b>" + QString::number(max_time_dish)+" минут\n");
       result_window->set_textbrowser("\n\n<b>Итого: <\b>" + QString::number( ui->lcdNumber->intValue())+ " рублей");
-
-
-
-
 
     } else
 
@@ -362,5 +240,103 @@ void MainWindow::on_Order_clicked()
         ui->statusbar->showMessage("Ваш заказ пуст!");
     }
 
-
 }
+
+void MainWindow::on_action_4_triggered()
+{
+    login_admin=new Login_Admin(this);
+    login_admin->set_admin_list(&groupadmin);
+    login_admin->show();
+
+    admin_panel = new AdminPanel(this);
+    login_admin->set_admin_panel(admin_panel);
+
+    admin_panel->set_waiter_panel_admin(Ivan);
+    admin_panel->set_waiter_list(&groupwaiter);
+    admin_panel->set_unitadmin_panel_admin(admin);
+    admin_panel->set_menu(&menu);
+    admin_panel->set_combobox();
+
+
+    admin_panel->set_list_layout("Первые блюда", ui->Layout_onedish);
+    admin_panel->set_list_layout("Вторые блюда", ui->Layout_twodish);
+    admin_panel->set_list_layout("Закуски", ui->Layout_threedish);
+    admin_panel->set_list_layout("Напитки", ui->Layout_drinks);
+
+//    connect(admin_panel, SIGNAL(mySignal()), this, SLOT(delete_dish_one()));
+    connect(admin_panel, SIGNAL(mySignal(QString, QVBoxLayout*)), this, SLOT(show_dish(QString, QVBoxLayout*)));
+//    connect(admin_panel, SIGNAL(mySignal_delete(QString, QVBoxLayout*)), this, SLOT(show_dish(QString, QVBoxLayout*)));
+}
+
+
+void MainWindow::show_dish(QString title_dish, QVBoxLayout *la)
+{
+    qDebug() << "Отрисовка";
+    delete_dish_one(la);
+
+    for (int i = 1; i <= menu.get_group(title_dish)->get_dish().size(); i++)
+    {
+      Dish *dish = menu.get_group(title_dish)->get_dish().value(i);
+      OrderItems *orderitems = new OrderItems(dish);
+
+      QString price =  QString::number(dish->get_price());
+      QString weight = QString::number(dish->get_weigth());
+      QString time =  QString::number(dish->get_time());
+
+
+      QHBoxLayout *lay = new QHBoxLayout();
+
+      CustomCheckbox *check = new CustomCheckbox();
+      check->setText(dish->get_title());
+      check->add_orderitems(orderitems);
+
+      QSpinBox *spin = new QSpinBox();
+      spin->setMaximumSize(70,30);
+
+      spin->setValue(orderitems->get_amount());
+      lay->addWidget(check);
+      lay->addWidget(spin);
+
+      la->addLayout(lay);
+      la->addWidget(new QLabel("Цена: " + price +"р"+ "\t" + "Вес: " + weight +"г" + "\t" + "Время приготовления: " + time +" м" ));
+
+      connect(spin, SIGNAL(valueChanged(int)),orderitems,SLOT(set_amount_slot(int)));
+      connect(spin, SIGNAL(valueChanged(int)),this,SLOT(view_check()));
+      connect(spin, SIGNAL(valueChanged(int)),this,SLOT(view_order_summ()));
+      connect(check,SIGNAL(stateChanged(int)), this,SLOT(boxclick()));
+      connect(check, SIGNAL(stateChanged(int)), this, SLOT(view_check()));
+      connect(check, SIGNAL(stateChanged(int)), this, SLOT(view_order_summ()));
+    }
+}
+
+
+
+void MainWindow::delete_dish_one(QVBoxLayout *la)
+    {
+//        qDebug() <<ui->Layout_onedish->count();
+
+        QLayoutItem *child;
+        while ((child = la->takeAt(0)) != nullptr)
+        {
+//            qDebug() << child->layout();
+            if (child->layout() != nullptr)
+            {
+                QLayoutItem *child1;
+                while ((child1 = child->layout()->takeAt(0)) != nullptr)
+                {
+                    if (child1 != nullptr)
+                    {
+//                        qDebug() << child1->widget();
+                        delete child1->widget(); // delete the widget
+                        delete child1;   // delete the layout item
+                    }
+
+                }
+            }
+            delete child->widget(); // delete the widget
+            delete child;   // delete the layout item
+
+   }
+  }
+
+

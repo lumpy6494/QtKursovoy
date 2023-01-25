@@ -11,6 +11,7 @@ class CustomCheckbox: public QCheckBox
 
 public:
     CustomCheckbox();
+    ~CustomCheckbox();
     OrderItems *items;
     void add_orderitems(OrderItems *item);
 

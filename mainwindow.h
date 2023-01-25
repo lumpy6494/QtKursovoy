@@ -12,8 +12,13 @@
 #include "orders.h"
 #include "table.h"
 #include "result_order.h"
+#include "login_admin.h"
 #include <QVBoxLayout>
-
+#include "admin.h"
+#include "group_admin.h"
+#include "group_waiter.h"
+#include "adminpanel.h"
+#include "customcheckbox.h"
 
 
 
@@ -39,15 +44,26 @@ private slots:
 
     void on_Order_clicked();
 
+    void on_action_4_triggered();
+
+    void delete_dish_one(QVBoxLayout * la);
+
+    void show_dish(QString title_dish, QVBoxLayout * la);
+
 private:
     Ui::MainWindow *ui;
     Result_order *result_window;
+    Group_Admin groupadmin;
+    Group_Waiter groupwaiter;
+
+    Login_Admin *login_admin;
+    AdminPanel *admin_panel;
 
     QSqlDatabase db;
-    Waiter Ivan;
+    Waiter *Ivan= new Waiter;
+    Admin *admin = new Admin;
 
-
-    Dish tea, lemonad;
+    Dish  tea, lemonad;
     Dish chicken_soup, shchi;
     Dish utka, mutton;
     Dish sushi, salmon ;
@@ -58,6 +74,7 @@ private:
     Menu menu;
     Orders order;
     Table table;
+
 
 };
 #endif // MAINWINDOW_H

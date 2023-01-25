@@ -21,8 +21,6 @@ class OrderItems:public QObject
     public slots:
         void set_amount_slot(int value);
 
-
-
     private:
     Dish dishes;
     int amount = 1 ;

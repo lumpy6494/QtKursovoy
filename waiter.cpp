@@ -5,18 +5,23 @@ Waiter::Waiter()
 {
 }
 
-Waiter::Waiter(QString name) {
-    this->name = name ;
+Waiter::~Waiter()
+{
+
 }
 
-
-QString Waiter::get_name()  {
+QString Waiter::getName()  {
     return this->name;
 }
 
-void Waiter::set_name(QString name)
+void Waiter::setName(QString name)
 {
     this->name = name;
 }
 
 
+
+Waiter* Waiter::clone() const
+{
+    return new Waiter(*this);
+}

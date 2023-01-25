@@ -22,7 +22,6 @@ void Menu::set_title(QString title)
     this->title = title;
 }
 
-
 Group* Menu::get_group(QString values)
 {
     return this->listgroup.value(values);

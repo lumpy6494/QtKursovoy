@@ -16,13 +16,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    admin.cpp \
+    adminpanel.cpp \
     customcheckbox.cpp \
     dish.cpp \
+    group_admin.cpp \
+    group_waiter.cpp \
     items_order.cpp \
+    login_admin.cpp \
     main.cpp \
     mainwindow.cpp \
     menu.cpp \
     orders.cpp \
+    staffvirt.cpp \
     table.cpp \
     waiter.cpp\
     group.cpp\
@@ -30,21 +36,28 @@ SOURCES += \
 
 
 HEADERS += \
+    admin.h \
+    adminpanel.h \
     customcheckbox.h \
     dish.h \
     group.h \
+    group_admin.h \
+    group_waiter.h \
     items_order.h \
+    login_admin.h \
     mainwindow.h \
     menu.h \
     orders.h \
     result_order.h \
-    staff.h \
+    staffvirt.h \
     table.h \
     waiter.h \
     result_order.h
 
 
 FORMS += \
+    adminpanel.ui \
+    login_admin.ui \
     mainwindow.ui \
     result_order.ui
 

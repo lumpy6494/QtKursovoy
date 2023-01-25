@@ -3,7 +3,6 @@
 #include <QString>
 #include "group.h"
 
-
 class Menu
 {
 private:
@@ -18,8 +17,6 @@ public:
     QMap<QString, Group *> get_all_group();
     void set_title(QString title);
     void set_group(Group *group);
-
-
 };
 
 #endif // MENU_H

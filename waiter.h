@@ -1,22 +1,20 @@
 #ifndef WAITER_H
 #define WAITER_H
-#include "staff.h"
+#include "staffvirt.h"
 #include <QString>
 
 
 
-class Waiter
+class Waiter: public Staffvirt
 {
 private:
     QString name;
 public:
     Waiter();
-    Waiter (QString name);
-    QString get_name();
-    void set_name(QString name);
-
+    ~Waiter();
+    void setName(QString name) override;
+    QString getName() override;
+    Waiter* clone() const;
 };
-
-
 
 #endif // WAITER_H
