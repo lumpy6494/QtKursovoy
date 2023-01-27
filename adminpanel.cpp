@@ -9,6 +9,7 @@ AdminPanel::AdminPanel(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
 }
 
 AdminPanel::~AdminPanel()
@@ -45,14 +46,71 @@ void AdminPanel::set_menu(Menu *menu)
 
 void AdminPanel::set_combobox()
 {
-    for(auto res : menu->get_all_group())
+    for(auto *res : menu->get_all_group())
     {
     //          ui->comboBox_menu->addItem(res->get_title());
         qDebug() << res->get_title();
         ui->comboBox_menu->addItem(res->get_title());
-
     }
 }
+
+void AdminPanel::set_combobox_admin()
+{
+    if (listadmin_admin_panel->get_all_admin().size() > 0)
+    {
+        for(auto *res : listadmin_admin_panel->get_all_admin())
+        {
+            ui->delete_admin->addItem(res->getName());
+        }
+    }
+
+}
+
+void AdminPanel::set_combobox_waiter()
+{
+    for(auto *res : listadmin_waiter_panel->get_all_waiters())
+        {
+            ui->comboBox_delete_waiter->addItem(res->getName());
+        }
+}
+
+
+void AdminPanel::view_waiter()
+{
+    for(auto* res : listadmin_waiter_panel->get_all_waiters())
+    {
+        ui->textBrowser_waiter->append(res->getName());
+
+    }
+
+//    qDebug() << this->listadmin_waiter_panel->get_all_waiters().size();
+}
+
+void AdminPanel::view_admin()
+{
+    if (listadmin_admin_panel->get_all_admin().size()>0)
+    {
+        for(auto res : listadmin_admin_panel->get_all_admin())
+        {
+            ui->textBrowser_admin->append(res->getName());
+
+        }
+
+    }
+
+
+//    qDebug() << this->listadmin_waiter_panel->get_all_waiters().size();
+}
+
+
+void AdminPanel::set_db_model(QSqlTableModel *model, QSqlDatabase &db)
+{
+    this->model= model;
+    this->db = db;
+
+}
+
+
 
 void AdminPanel::on_pushButton_add_waiter_clicked()
 {
@@ -63,6 +121,8 @@ void AdminPanel::on_pushButton_add_waiter_clicked()
         this->listadmin_waiter_panel->set_waiter_in_group(wait);
         ui->lineEdit_name_waiter->clear();
         ui->label_status->setText("Официант " + wait->getName() + " успешно добавлен!");
+        ui->comboBox_delete_waiter->addItem(wait->getName());
+        ui->textBrowser_waiter->append(wait->getName());
         qDebug() << wait->getName();
 
     }
@@ -85,6 +145,8 @@ void AdminPanel::on_pushButton_add_admin_clicked()
         ui->lineEdit_login_admin->clear();
         ui->lineEdit_pass_admin->clear();
         ui->label_status->setText("Администратор " + adm->getName() + " успешно добавлен!");
+        ui->textBrowser_admin->append(adm->getName());
+        ui->delete_admin->addItem(adm->getName());
     }
     else {
         ui->label_status->setText("Все поля должны быть заполненными !");
@@ -109,8 +171,12 @@ void AdminPanel::on_pushButton_add_dish_clicked()
             ui->lineEdit_price_dish->clear();
             ui->lineEdit_weight_dish->clear();
             ui->lineEdit_time_dish->clear();
+            ui->label_status->setText("Новое блюдо " + di->get_title() + " успешно добавлено!");
+
 
             emit mySignal(ui->comboBox_menu->currentText(), this->listlayout.value(ui->comboBox_menu->currentText()));
+
+
 
     }
     else
@@ -133,6 +199,57 @@ void AdminPanel::on_buttonBox_accepted()
 }
 
 
+void AdminPanel::on_pushButton_delete_admin_clicked()
+{
+    qDebug() << this->listadmin_admin_panel->get_all_admin().size();
+    for(auto* res : listadmin_admin_panel->get_all_admin())
+    {
+
+            if (ui->delete_admin->currentText() == res->getName())
+            {
+                   listadmin_admin_panel->del_items(res->getLogin());
+
+                ui->label_status->setText("Администратор "+ res->getName()+" удален!");
+
+            }
+
+    }
+
+    qDebug() << this->listadmin_admin_panel->get_all_admin().size();
+}
+
+void AdminPanel::on_pushButton_delete_waiter_clicked()
+{
+
+    for (int i =0; i < listadmin_waiter_panel->get_all_waiters().size(); i++)
+    {
+        if (listadmin_waiter_panel->get_all_waiters().size() > 1)
+        {
+            if (ui->comboBox_delete_waiter->currentText() == listadmin_waiter_panel->get_waiters_is_group(i+1)->getName())
+            {
+                qDebug() << listadmin_waiter_panel->get_waiters_is_group(i+1)->getName();
+                listadmin_waiter_panel->del_items_waiter(i+1);
+
+                ui->label_status->setText("Официант "+ listadmin_waiter_panel->get_waiters_is_group(i)->getName()+" удален!");
+            }
+        }
+        else
+        {
+         ui->label_status->setText("В системе должен быть хотябы 1 официант");
+        }
+
+    }
+
+}
+
+void AdminPanel::on_pushButton_history_clicked()
+{
+    History *his = new History();
+    this->model = new QSqlTableModel(this, db);
+    this->model->setTable("historyorder");
+    this->model->select();
+    his->show_history(model);
+    his->show();
 
 
-
+}

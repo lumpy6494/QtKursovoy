@@ -19,6 +19,8 @@
 #include "group_waiter.h"
 #include "adminpanel.h"
 #include "customcheckbox.h"
+#include <QSqlQuery>
+#include <QSqlTableModel>
 
 
 
@@ -50,16 +52,22 @@ private slots:
 
     void show_dish(QString title_dish, QVBoxLayout * la);
 
+    void on_action_3_triggered();
+
 private:
     Ui::MainWindow *ui;
     Result_order *result_window;
-    Group_Admin groupadmin;
+    Group_Admin *groupadmin =new Group_Admin;
     Group_Waiter groupwaiter;
 
     Login_Admin *login_admin;
     AdminPanel *admin_panel;
 
     QSqlDatabase db;
+    QSqlQuery *query;
+    QSqlTableModel *model;
+
+
     Waiter *Ivan= new Waiter;
     Admin *admin = new Admin;
 

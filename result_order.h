@@ -25,6 +25,7 @@ private:
     Ui::Result_order *ui;
 
 
+
 };
 
 #endif // RESULT_ORDER_H

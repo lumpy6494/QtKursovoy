@@ -48,5 +48,6 @@ void Result_order::set_table_result_check(QMap<int, QStringList>va, int rows)
 
 void Result_order::on_buttonBox_accepted()
 {
+
     return QApplication::exit();
 }

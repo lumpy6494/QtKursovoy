@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QVBoxLayout>
+#include <QSqlTableModel>
+#include <QtSql/QSqlDatabase>
 #include "waiter.h"
 #include "admin.h"
 #include "group_admin.h"
@@ -10,6 +12,7 @@
 #include "menu.h"
 #include "dish.h"
 #include "group.h"
+#include "history.h"
 
 
 namespace Ui {
@@ -28,6 +31,11 @@ public:
     void set_waiter_list(Group_Waiter *admin_waiter);
     void set_menu(Menu *menu);
     void set_combobox();
+    void set_combobox_admin();
+    void set_combobox_waiter();
+    void view_waiter();
+    void view_admin();
+    void set_db_model(QSqlTableModel *model, QSqlDatabase &db);
     void set_list_layout(QString key, QVBoxLayout* layout_box );
     ~AdminPanel();
 
@@ -40,7 +48,11 @@ private slots:
 
     void on_buttonBox_accepted();
 
+    void on_pushButton_delete_admin_clicked();
 
+    void on_pushButton_delete_waiter_clicked();
+
+    void on_pushButton_history_clicked();
 
 private:
     Ui::AdminPanel *ui;
@@ -49,6 +61,8 @@ private:
     Group_Admin *listadmin_admin_panel;
     Group_Waiter *listadmin_waiter_panel;
     Menu *menu;
+    QSqlTableModel *model;
+    QSqlDatabase db;
 
     QMap<QString, QVBoxLayout *> listlayout;
 

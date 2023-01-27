@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>702</width>
-    <height>511</height>
+    <width>899</width>
+    <height>553</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,8 +21,8 @@ font: 75 italic 14pt;</string>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>460</y>
+     <x>660</x>
+     <y>500</y>
      <width>191</width>
      <height>41</height>
     </rect>
@@ -37,25 +37,41 @@ font: 75 italic 14pt;</string>
   <widget class="QLabel" name="label_add_admin">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>70</y>
-     <width>351</width>
-     <height>41</height>
+     <x>20</x>
+     <y>20</y>
+     <width>441</width>
+     <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Condensed</family>
+     <pointsize>18</pointsize>
+     <weight>9</weight>
+     <italic>true</italic>
+     <bold>false</bold>
+     <underline>false</underline>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">font: 75 italic 23pt &quot;Ubuntu Condensed&quot;;
+    <string notr="true">font: 75 italic 18pt &quot;Ubuntu Condensed&quot;;
 border: 0px;</string>
    </property>
    <property name="text">
     <string>Добавить администратора</string>
    </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>230</y>
+     <x>20</x>
+     <y>240</y>
      <width>440</width>
      <height>28</height>
     </rect>
@@ -73,42 +89,74 @@ border: 0px;</string>
   <widget class="QLabel" name="label_add_waiter_2">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>190</y>
-     <width>291</width>
+     <x>20</x>
+     <y>200</y>
+     <width>441</width>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Condensed</family>
+     <pointsize>18</pointsize>
+     <weight>9</weight>
+     <italic>true</italic>
+     <bold>false</bold>
+     <underline>false</underline>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">font: 75 italic 23pt &quot;Ubuntu Condensed&quot;;
+    <string notr="true">font: 75 italic 18pt &quot;Ubuntu Condensed&quot;;
 border: 0px;</string>
    </property>
    <property name="text">
     <string>Добавить официанта</string>
    </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QLabel" name="label_add_waiter_3">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>300</y>
-     <width>311</width>
-     <height>41</height>
+     <x>30</x>
+     <y>360</y>
+     <width>431</width>
+     <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Condensed</family>
+     <pointsize>18</pointsize>
+     <weight>9</weight>
+     <italic>true</italic>
+     <bold>false</bold>
+     <underline>false</underline>
+    </font>
+   </property>
    <property name="styleSheet">
-    <string notr="true">font: 75 italic 23pt &quot;Ubuntu Condensed&quot;;
+    <string notr="true">font: 75 italic 18pt &quot;Ubuntu Condensed&quot;;
 border: 0px;</string>
    </property>
    <property name="text">
     <string>Добавить новое блюдо</string>
    </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QPushButton" name="pushButton_add_admin">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>120</y>
+     <x>470</x>
+     <y>60</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -125,8 +173,8 @@ background-color :qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 
   <widget class="QPushButton" name="pushButton_add_waiter">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>230</y>
+     <x>470</x>
+     <y>240</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -144,9 +192,9 @@ background-color :qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>460</y>
-     <width>511</width>
-     <height>41</height>
+     <y>530</y>
+     <width>591</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -160,8 +208,8 @@ background-color :qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>120</y>
+     <x>20</x>
+     <y>60</y>
      <width>440</width>
      <height>28</height>
     </rect>
@@ -183,6 +231,9 @@ background-color :qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 
     </item>
     <item>
      <widget class="QLineEdit" name="lineEdit_pass_admin">
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
       <property name="placeholderText">
        <string>Пароль</string>
       </property>
@@ -193,8 +244,8 @@ background-color :qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 
   <widget class="QPushButton" name="pushButton_add_dish">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>370</y>
+     <x>470</x>
+     <y>410</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -211,8 +262,8 @@ background-color :qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>350</y>
+     <x>30</x>
+     <y>390</y>
      <width>431</width>
      <height>62</height>
     </rect>
@@ -258,6 +309,193 @@ background-color :qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 
      <widget class="QComboBox" name="comboBox_menu"/>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="label_delete_admin">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>441</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Condensed</family>
+     <pointsize>18</pointsize>
+     <weight>9</weight>
+     <italic>true</italic>
+     <bold>false</bold>
+     <underline>false</underline>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 italic 18pt &quot;Ubuntu Condensed&quot;;
+border: 0px;</string>
+   </property>
+   <property name="text">
+    <string>Удалить администратора</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="delete_admin">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>140</y>
+     <width>441</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_delete_admin">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>140</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton:pressed{
+background-color :qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 0, 69), stop:0.375 rgba(255, 255, 0, 69), stop:0.423533 rgba(251, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(255, 218, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.57754 rgba(255, 203, 0, 130), stop:0.625 rgba(255, 255, 0, 69), stop:1 rgba(255, 255, 0, 69))
+}  </string>
+   </property>
+   <property name="text">
+    <string>Удалить</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser_admin">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>40</y>
+     <width>291</width>
+     <height>171</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_view_admin">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>10</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Администраторы</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser_waiter">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>260</y>
+     <width>291</width>
+     <height>231</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_waiter_admin">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>230</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Официанты</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_delete_waiter">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>310</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton:pressed{
+background-color :qconicalgradient(cx:0, cy:0, angle:135, stop:0 rgba(255, 255, 0, 69), stop:0.375 rgba(255, 255, 0, 69), stop:0.423533 rgba(251, 255, 0, 145), stop:0.45 rgba(247, 255, 0, 208), stop:0.477581 rgba(255, 244, 71, 130), stop:0.518717 rgba(255, 218, 71, 130), stop:0.55 rgba(255, 255, 0, 255), stop:0.57754 rgba(255, 203, 0, 130), stop:0.625 rgba(255, 255, 0, 69), stop:1 rgba(255, 255, 0, 69))
+}  </string>
+   </property>
+   <property name="text">
+    <string>Удалить</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_delete_waiter">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>280</y>
+     <width>441</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu Condensed</family>
+     <pointsize>18</pointsize>
+     <weight>9</weight>
+     <italic>true</italic>
+     <bold>false</bold>
+     <underline>false</underline>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 italic 18pt &quot;Ubuntu Condensed&quot;;
+border: 0px;</string>
+   </property>
+   <property name="text">
+    <string>Удалить официанта</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_delete_waiter">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>310</y>
+     <width>441</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_history">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>490</y>
+     <width>441</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Посмотреть историю заказов</string>
+   </property>
   </widget>
  </widget>
  <resources/>

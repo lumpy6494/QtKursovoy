@@ -20,3 +20,8 @@ Waiter* Group_Waiter::get_waiters_is_group(int val)
 {
    return this->listwaiters.value(val);
 }
+
+void Group_Waiter::del_items_waiter(int value)
+{
+    this->listwaiters.remove(value);
+}

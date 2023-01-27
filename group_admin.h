@@ -13,6 +13,7 @@ public:
     QMap<QString, Admin *> get_all_admin();
     Admin* get_admin_is_group(QString values);
     void set_group_admin(Admin *admin);
+    void del_items(QString value);
 
 };
 

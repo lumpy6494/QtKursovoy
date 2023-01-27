@@ -8,6 +8,7 @@ class Staffvirt
 private:
 
 public:
+    virtual ~Staffvirt() = default;
     virtual void setName(QString name);
     virtual QString getName() = 0;
     virtual Staffvirt* clone() const = 0;

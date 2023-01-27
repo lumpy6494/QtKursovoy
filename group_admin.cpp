@@ -21,3 +21,9 @@ Admin* Group_Admin::get_admin_is_group(QString values)
 {
     return this->listadmin.value(values);
 }
+
+void Group_Admin::del_items(QString value)
+{
+    listadmin.remove(value);
+}
+

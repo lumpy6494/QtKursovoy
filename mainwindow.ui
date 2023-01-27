@@ -270,7 +270,7 @@ qproperty-alignment:'AlignVCenter | AlignCenter';</string>
           <rect>
            <x>10</x>
            <y>630</y>
-           <width>631</width>
+           <width>641</width>
            <height>181</height>
           </rect>
          </property>
@@ -322,6 +322,9 @@ font: 75 italic 16pt &quot;Yrsa&quot;;
     <addaction name="action_4"/>
    </widget>
    <widget class="QMenu" name="menu_2">
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="title">
      <string>Выход</string>
     </property>

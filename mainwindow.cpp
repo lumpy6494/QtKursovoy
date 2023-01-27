@@ -19,7 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("./main.db");
+    db.setDatabaseName("/mnt/0EC679B2C6799AA3/ГУАП/ООП_3_Курс/Курсовой проект/restaurant/qtdata.db");
+    query = new QSqlQuery(db);
+
 
     Ivan->setName("Иван");
     groupwaiter.set_waiter_in_group(Ivan);
@@ -28,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     admin->setLogin("admin");
     admin->setPassword("12345");
 
-    groupadmin.set_group_admin(admin);
+    groupadmin->set_group_admin(admin);
 
     table.set_table(12);
 
@@ -123,7 +125,19 @@ MainWindow::MainWindow(QWidget *parent)
 
         ui->statusbar->showMessage("Не удалось подключиться к базе данныx!");
     }
+    query->exec("CREATE TABLE historyorder(id INTEGER PRIMARY KEY, number INTEGER, waiter TEXT, timeorder INTEGER, summ INTEGER, dishid INTEGER, FOREIGN KEY(dishid) REFERENCES orderdish(id));");
 
+
+
+
+
+
+
+//    qDebug() << groupadmin->get_all_admin().remove("admin");
+//    qDebug() <<groupadmin->get_all_admin().size();
+//    qDebug() << groupadmin->get_all_admin().take("admin");
+//     groupadmin->get_all_admin().take("admin");
+//    qDebug() <<groupadmin->get_all_admin().size();
 }
 
 
@@ -240,12 +254,18 @@ void MainWindow::on_Order_clicked()
         ui->statusbar->showMessage("Ваш заказ пуст!");
     }
 
+
+    this->query->exec("INSERT INTO historyorder (id,number, waiter,timeorder, summ, dishid)"
+                      "VALUES (1, 1222, Ivan, 20, 1900,1)");
+
 }
+
+
 
 void MainWindow::on_action_4_triggered()
 {
     login_admin=new Login_Admin(this);
-    login_admin->set_admin_list(&groupadmin);
+    login_admin->set_admin_list(groupadmin);
     login_admin->show();
 
     admin_panel = new AdminPanel(this);
@@ -253,9 +273,15 @@ void MainWindow::on_action_4_triggered()
 
     admin_panel->set_waiter_panel_admin(Ivan);
     admin_panel->set_waiter_list(&groupwaiter);
+    admin_panel->set_admin_list(groupadmin);
     admin_panel->set_unitadmin_panel_admin(admin);
     admin_panel->set_menu(&menu);
     admin_panel->set_combobox();
+    admin_panel->view_admin();
+    admin_panel->view_waiter();
+    admin_panel->set_combobox_admin();
+    admin_panel->set_combobox_waiter();
+    admin_panel->set_db_model(model, db);
 
 
     admin_panel->set_list_layout("Первые блюда", ui->Layout_onedish);
@@ -340,3 +366,8 @@ void MainWindow::delete_dish_one(QVBoxLayout *la)
   }
 
 
+
+void MainWindow::on_action_3_triggered()
+{
+     return QApplication::exit();
+}

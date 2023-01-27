@@ -22,6 +22,7 @@ SOURCES += \
     dish.cpp \
     group_admin.cpp \
     group_waiter.cpp \
+    history.cpp \
     items_order.cpp \
     login_admin.cpp \
     main.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     group.h \
     group_admin.h \
     group_waiter.h \
+    history.h \
     items_order.h \
     login_admin.h \
     mainwindow.h \
@@ -57,6 +59,7 @@ HEADERS += \
 
 FORMS += \
     adminpanel.ui \
+    history.ui \
     login_admin.ui \
     mainwindow.ui \
     result_order.ui

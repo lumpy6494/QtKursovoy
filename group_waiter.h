@@ -15,6 +15,7 @@ public:
     QMap<int, Waiter *> get_all_waiters();
     void set_waiter_in_group(Waiter *waiter);
     Waiter* get_waiters_is_group(int val);
+    void del_items_waiter(int value);
 
 
 };
