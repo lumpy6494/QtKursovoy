@@ -125,10 +125,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         ui->statusbar->showMessage("Не удалось подключиться к базе данныx!");
     }
-    query->exec("CREATE TABLE historyorder(id INTEGER PRIMARY KEY, number INTEGER, waiter TEXT, timeorder INTEGER, summ INTEGER, dishid INTEGER, FOREIGN KEY(dishid) REFERENCES orderdish(id));");
-
-
-
+    query->exec("CREATE TABLE historyorders(number INTEGER, waiter TEXT, timeorder INTEGER, summ INTEGER);");
 
 
 
@@ -240,13 +237,20 @@ void MainWindow::on_Order_clicked()
 
       }
       int randomValue = (qrand() % groupwaiter.get_all_waiters().size())+1;
-
+      QString namewaiter =  groupwaiter.get_waiters_is_group(randomValue)->getName();
       qDebug() << randomValue;
       result_window->set_table_result_check(liststr, size_order);
       result_window->set_textbrowser("\n\n<b>Номер вашего столика: <\b>" + QString::number(order.get_table()->get_table()));
-      result_window->set_textbrowser("\n<b>Ваш Официант: <\b>" + groupwaiter.get_waiters_is_group(randomValue)->getName() + "\n");
+      result_window->set_textbrowser("\n<b>Ваш Официант: <\b>" + namewaiter + "\n");
       result_window->set_textbrowser("<b>Максимальное время подачи заказа: <\b>" + QString::number(max_time_dish)+" минут\n");
       result_window->set_textbrowser("\n\n<b>Итого: <\b>" + QString::number( ui->lcdNumber->intValue())+ " рублей");
+
+      this->query->prepare("INSERT INTO historyorders(number, waiter,timeorder, summ) VALUES (?, ?, ?, ?);");
+      query->addBindValue(order.get_table()->get_table());
+      query->addBindValue(namewaiter);
+      query->addBindValue(max_time_dish);
+      query->addBindValue(ui->lcdNumber->intValue());
+      query->exec();
 
     } else
 
@@ -255,8 +259,7 @@ void MainWindow::on_Order_clicked()
     }
 
 
-    this->query->exec("INSERT INTO historyorder (id,number, waiter,timeorder, summ, dishid)"
-                      "VALUES (1, 1222, Ivan, 20, 1900,1)");
+
 
 }
 
@@ -297,7 +300,7 @@ void MainWindow::on_action_4_triggered()
 
 void MainWindow::show_dish(QString title_dish, QVBoxLayout *la)
 {
-    qDebug() << "Отрисовка";
+//    qDebug() << "Отрисовка";
     delete_dish_one(la);
 
     for (int i = 1; i <= menu.get_group(title_dish)->get_dish().size(); i++)

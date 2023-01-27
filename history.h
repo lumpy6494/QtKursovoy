@@ -19,8 +19,15 @@ public:
 
     ~History();
 
+private slots:
+    void on_tableView_history_clicked(const QModelIndex &index);
+
+    void on_pushButton_delete_history_clicked();
+
 private:
     Ui::History *ui;
+    QSqlTableModel *mod;
+    int row;
 };
 
 #endif // HISTORY_H

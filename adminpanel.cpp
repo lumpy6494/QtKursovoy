@@ -246,9 +246,17 @@ void AdminPanel::on_pushButton_history_clicked()
 {
     History *his = new History();
     this->model = new QSqlTableModel(this, db);
-    this->model->setTable("historyorder");
+    this->model->setTable("historyorders");
     this->model->select();
     his->show_history(model);
+
+    model->setHeaderData(0, Qt::Horizontal, tr("Столик"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Официант"));
+    model->setHeaderData(2, Qt::Horizontal, tr("Время ожидания"));
+    model->setHeaderData(3, Qt::Horizontal, tr("Общая сумма"));
+
+
+
     his->show();
 
 

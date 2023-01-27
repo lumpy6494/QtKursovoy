@@ -15,6 +15,18 @@ History::~History()
 
 void History::show_history(QSqlTableModel *model)
 {
-    qDebug() << model;
-    ui->tableView->setModel(model);
+    this->mod = model;
+    ui->tableView_history->setModel(model);
+}
+
+void History::on_tableView_history_clicked(const QModelIndex &index)
+{
+    row = index.row();
+}
+
+void History::on_pushButton_delete_history_clicked()
+{
+   mod->removeRow(row);
+   ui->label_history_status->setText("Строка Удалена!");
+
 }
